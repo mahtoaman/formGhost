@@ -1,0 +1,20 @@
+# FormGhost - https://github.com/mahtoaman/formghost
+# https://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+# Keep the license texts byte for byte
+[{LICENSE,NOTICE}]
+trim_trailing_whitespace = false
+indent_style = unset
+indent_size = unset

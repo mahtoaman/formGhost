@@ -1,0 +1,95 @@
+FormGhost
+Copyright 2026 Aman Mahto (@mahtoaman)
+
+This product includes software developed by Aman Mahto (@mahtoaman) - https://github.com/mahtoaman/formghost
+
+Licensed under the Apache License, Version 2.0 (see the LICENSE file).
+Under Section 4 of that license, anyone who redistributes this work or a
+derivative of it, in source or packaged form (including a browser extension
+package), must keep:
+  - a copy of the LICENSE file,
+  - this NOTICE file (Section 4(d)), and
+  - the copyright, attribution and license headers at the top of every
+    source file (Section 4(c)).
+
+
+===============================================================================
+Third-party data in lib/data-in.js
+===============================================================================
+
+lib/data-in.js holds a small, hand-curated subset of two public Indian
+reference datasets: 242 pincodes (with post office, district and locality)
+and 820 IFSC codes (with branch name and MICR code) for 43 cities. Both were
+fetched on 2026-10-19. The licence facts below were checked online on
+2026-10-19; what was and was not verified is stated for each.
+
+
+1. All India Pincode Directory (India Post)
+-------------------------------------------
+
+Provider:  Department of Posts, Ministry of Communications, Government of India
+Source:    Open Government Data (OGD) Platform India
+           https://www.data.gov.in/catalog/all-india-pincode-directory
+           https://www.data.gov.in/resource/all-india-pincode-directory-till-last-month
+Used:      pincode, post office name and district of selected offices, and
+           the locality each office serves.
+Licence:   Government Open Data License - India (GODL-India)
+           https://www.data.gov.in/Godl
+           Gazette of India, Extraordinary, Part I Section 1, No. 42,
+           13 February 2017:
+           https://www.data.gov.in/sites/default/files/Gazette_Notification_OGDL.pdf
+
+Verified:
+  - The footer of the OGD Platform's pages, including the catalog and
+    resource pages above, states: "Content is owned by the respective Ministries/Departments/
+    Organizations and licensed under the Government Open Data License-India."
+  - The resource page's own licence field is empty, so that platform-wide
+    statement is the licence that applies to this dataset.
+  - The gazette text of GODL-India grants "a worldwide, royalty-free,
+    non-exclusive license to use, adapt, publish (either in original, or in
+    adapted and/or derivative forms), translate, display, add value, and
+    create derivative works (including products and services), for all
+    lawful commercial and non-commercial purposes". Section 4(a) requires
+    users to "acknowledge the provider, source, and license of data by
+    explicitly publishing the attribution statement", including the URL of
+    the data. Section 4(c) says users must not suggest that the data
+    provider endorses their use.
+Not verified:
+  - The exact wording of the attribution template in section 5 of the
+    gazette could not be read from the PDF. The statement below names the
+    provider, source, licence and URL, as section 4(a) requires.
+
+Attribution statement:
+  Contains pincode data from the All India Pincode Directory, published by
+  the Department of Posts, Ministry of Communications, Government of India,
+  on the Open Government Data Platform India
+  (https://www.data.gov.in/catalog/all-india-pincode-directory) under the
+  Government Open Data License - India (https://www.data.gov.in/Godl).
+
+The Department of Posts and the Government of India do not endorse FormGhost.
+The data is provided without warranty.
+
+
+2. Razorpay IFSC dataset
+------------------------
+
+Provider:  Razorpay - https://github.com/razorpay/ifsc
+Source:    release v2.0.62, file IFSC.csv
+           https://github.com/razorpay/ifsc/releases/tag/v2.0.62
+           (Razorpay compiles it from lists published by the Reserve Bank of
+           India and NPCI.)
+Used:      IFSC, branch name and MICR code of selected branches; the bank is
+           taken from the IFSC's first four letters.
+
+Verified:
+  - The "License" section of the repository's README
+    (https://github.com/razorpay/ifsc#license) states: "The code in this
+    repository is licensed under the MIT License. License text is available
+    in the LICENSE file. The dataset itself is under public domain."
+  - The repository's LICENSE file
+    (https://github.com/razorpay/ifsc/blob/master/LICENSE) is the MIT
+    License, "Copyright (c) 2020 Razorpay". It covers Razorpay's code.
+    FormGhost includes none of that code, only values from the dataset.
+
+Credit to Razorpay for compiling and publishing the dataset is given here
+voluntarily.

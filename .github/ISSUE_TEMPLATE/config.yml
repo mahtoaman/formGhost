@@ -1,0 +1,9 @@
+# FormGhost - https://github.com/mahtoaman/formghost · by Aman Mahto (@mahtoaman) · Apache-2.0
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/mahtoaman/formghost/security/advisories/new
+    about: Please report security problems privately, not in a public issue.
+  - name: Read the README
+    url: https://github.com/mahtoaman/formghost#readme
+    about: Usage, settings, privacy and development notes.

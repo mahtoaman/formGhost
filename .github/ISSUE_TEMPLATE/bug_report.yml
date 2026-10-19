@@ -1,0 +1,93 @@
+# FormGhost - https://github.com/mahtoaman/formghost · by Aman Mahto (@mahtoaman) · Apache-2.0
+name: Bug report
+description: FormGhost filled something wrong, skipped a field, or broke a page.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please don't paste real personal data, and report security problems privately (see SECURITY.md), not here.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened
+      description: A short description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What you clicked or pressed (popup Fill, Alt+Shift+F, right-click menu item, Undo, Inspect…).
+      placeholder: |
+        1. Open https://example.com/signup
+        2. Click the ghost → Fill this page
+        3. Look at the "Date of birth" field
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      description: A public URL where it happens, if there is one.
+      placeholder: https://example.com/signup
+  - type: dropdown
+    id: site-type
+    attributes:
+      label: Site / form type
+      multiple: true
+      options:
+        - Plain HTML form
+        - React / Vue / Angular app
+        - UI library widget (react-select, MUI, Ant Design, Radix / shadcn, Headless UI…)
+        - Date picker
+        - Rich text editor
+        - Phone number / country picker or input mask
+        - Google Forms
+        - Form inside a dialog / iframe / shadow DOM
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: html
+    attributes:
+      label: Minimal HTML (if the page is private)
+      description: The smallest form markup that shows the problem. It becomes a test fixture.
+      render: html
+  - type: textarea
+    id: filled
+    attributes:
+      label: What was filled vs what you expected
+      description: For each field that went wrong, its label, the value FormGhost put in (or "skipped"), and the value you expected.
+      placeholder: |
+        "Date of birth": filled 2031-04-12, expected a past date
+        "State": skipped, expected Karnataka
+    validations:
+      required: true
+  - type: input
+    id: region
+    attributes:
+      label: Region / country used
+      placeholder: India (South), auto-detected
+  - type: input
+    id: formghost-version
+    attributes:
+      label: FormGhost version
+      description: Shown at the top of the popup, or on chrome://extensions.
+      placeholder: "2.0.0"
+    validations:
+      required: true
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser and version
+      description: From chrome://version.
+      placeholder: Chrome 141.0.7390.66 on macOS 15
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Settings you changed (Overwrite, Required fields only, rules, Testing switches), console errors, screenshots.

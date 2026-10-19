@@ -1,0 +1,45 @@
+# FormGhost - https://github.com/mahtoaman/formghost
+# Copyright 2026 Aman Mahto (@mahtoaman). Licensed under the Apache License, Version 2.0.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # Libraries, background messages and the attribution checks (headers, LICENSE, NOTICE, credits)
+      - name: Node tests
+        run: node --test test/
+
+      - name: Set up Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+          install-dependencies: true
+
+      # Form-filling fixtures in headless Chrome (run.mjs adds --no-sandbox when CI is set)
+      - name: Fixture tests
+        run: node test/run.mjs
+        env:
+          CHROME: ${{ steps.setup-chrome.outputs.chrome-path }}

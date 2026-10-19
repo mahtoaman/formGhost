@@ -1,0 +1,50 @@
+# FormGhost - https://github.com/mahtoaman/formghost · by Aman Mahto (@mahtoaman) · Apache-2.0
+name: Feature request
+description: Suggest a new field type, region, widget, setting or tool.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to test, and what does FormGhost do today?
+      placeholder: Our signup form has a "GST registration date" field and FormGhost leaves it empty.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you'd like
+      description: What FormGhost should fill, or how the feature should work.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Example page
+      description: A public URL or form where this matters, if there is one.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Field detection / values
+        - Region or country data
+        - Custom widgets / date pickers / editors
+        - Popup or settings
+        - Right-click menu or shortcuts
+        - QA tools (Inspect, test values, Copy as…, export)
+        - Other
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've tried
+      description: For example a rule or "Fill field as" that almost does it.
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contributing
+      options:
+        - label: I'd like to open a pull request for this (see CONTRIBUTING.md)

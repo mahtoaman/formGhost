@@ -1,0 +1,35 @@
+# FormGhost - https://github.com/mahtoaman/formghost
+
+# Build output (node scripts/pack.mjs)
+dist/
+*.zip
+*.crx
+# Chrome's "Pack extension" signing key: never commit it
+*.pem
+
+# Dependencies (the project has none, but tools may create these)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors and IDEs
+.vscode/
+.idea/
+.fleet/
+.zed/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Local editor session state
+.claude/
+
+# Logs and local scratch
+*.log
+.env
+.env.*

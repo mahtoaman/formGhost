@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "FormGhost: Smart Form Filler",
+  "short_name": "FormGhost",
+  "version": "2.0.0",
+  "description": "Fill any form in one click with realistic, region-aware test data. Auto-detects your country from your IP. By @mahtoaman.",
+  "author": "Aman Mahto (@mahtoaman)",
+  "homepage_url": "https://github.com/mahtoaman/formghost",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "FormGhost",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
+  "host_permissions": [
+    "https://ipwho.is/*",
+    "https://get.geojs.io/*",
+    "https://ipapi.co/*",
+    "https://api.country.is/*"
+  ],
+  "commands": {
+    "fill-page": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Fill all forms on this page"
+    },
+    "fill-form": {
+      "description": "Fill the form around the focused field"
+    },
+    "fill-field": {
+      "description": "Fill only the focused field"
+    },
+    "undo-fill": {
+      "description": "Undo the last fill"
+    }
+  }
+}

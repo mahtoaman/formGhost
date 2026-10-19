@@ -1,0 +1,276 @@
+<!doctype html>
+<!--
+  FormGhost - https://github.com/mahtoaman/formghost
+  Copyright 2026 Aman Mahto (@mahtoaman)
+  Licensed under the Apache License, Version 2.0. See LICENSE and NOTICE.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FormGhost</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="main">
+    <header class="top">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 6c-12.7 0-22 9.6-22 22.5V56l6-5 5.5 5 5.3-5 5.2 5 5.2-5 5.3 5 5.5-5 6 5V28.5C54 15.6 44.7 6 32 6z" />
+          <ellipse class="eye" cx="24.5" cy="29" rx="3.6" ry="4.6" />
+          <ellipse class="eye" cx="39.5" cy="29" rx="3.6" ry="4.6" />
+        </svg>
+        <span class="wordmark">FormGhost</span>
+        <a class="by" href="https://github.com/mahtoaman" data-ext title="Aman Mahto on GitHub">by @mahtoaman</a>
+      </div>
+      <div class="top-r">
+        <span class="ver" id="ver"></span>
+        <button class="icon-btn" id="inspect" title="Show on the page what each field will get" aria-label="Inspect fields" aria-pressed="false">
+          <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg>
+        </button>
+        <button class="icon-btn" id="openSettings" title="Settings" aria-label="Settings" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Region -->
+    <section class="card region" id="regionCard">
+      <div class="cc" id="ccBadge">··</div>
+      <div class="region-text">
+        <div class="region-name" id="regionName">Detecting…</div>
+        <div class="region-sub"><span class="dot" id="geoDot"></span><span id="regionSub">Looking up your IP</span></div>
+      </div>
+      <label class="pill-select" title="Choose region">
+        <span id="pillLabel">Auto</span>
+        <svg viewBox="0 0 20 20"><path d="M5.5 7.5 10 12l4.5-4.5" /></svg>
+        <select id="country"></select>
+      </label>
+    </section>
+
+    <!-- Persona -->
+    <section class="card persona" id="personaCard">
+      <div class="p-head">
+        <div class="avatar" id="avatar">··</div>
+        <div class="p-id">
+          <div class="p-name" id="pName">&nbsp;</div>
+          <div class="p-meta" id="pMeta">&nbsp;</div>
+        </div>
+        <div class="p-acts">
+          <button class="text-btn" id="openDetails" title="Every detail of this identity, and recent ones" aria-haspopup="dialog">Details</button>
+          <button class="icon-btn" id="shuffle" title="New identity (the same one is kept across all steps of a site)" aria-label="New identity">
+            <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8" /><path d="M4 4v4h4" /><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16" /><path d="M20 20v-4h-4" /></svg>
+          </button>
+        </div>
+      </div>
+      <ul class="p-rows">
+        <li data-copy="email" tabindex="0" role="button"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" /></svg><span id="pEmail">&nbsp;</span><em>copy</em></li>
+        <li data-copy="phone" tabindex="0" role="button"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5" /><path d="M11 18.5h2" /></svg><span><b class="code" id="pCode"></b><span id="pPhone">&nbsp;</span></span><em>copy</em></li>
+        <li data-copy="address" tabindex="0" role="button"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg><span id="pAddr">&nbsp;</span><em>copy</em></li>
+      </ul>
+    </section>
+
+    <div class="note" id="offNote" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="m6 6 12 12" /></svg>
+      <span class="note-text">Off on <b id="offHost"></b></span>
+      <button class="link" id="turnOn">Turn on</button>
+    </div>
+    <div class="note" id="testNote" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6.5L4.6 18.2A1.9 1.9 0 0 0 6.2 21h11.6a1.9 1.9 0 0 0 1.6-2.8L14 9.5V3" /><path d="M7.5 15h9" /></svg>
+      <span class="note-text">Testing: <b id="testText"></b></span>
+      <button class="link" id="testEdit">Change</button>
+    </div>
+
+    <button class="fill" id="fill" disabled>
+      <span class="fill-label">Fill this page</span>
+      <span class="kbd" id="kbd" hidden></span>
+    </button>
+
+    <section class="phone">
+      <div class="label-row"><span class="label">Phone number</span><span class="example" id="phoneExample"></span></div>
+      <div class="seg" id="phoneMode">
+        <span class="seg-ind"></span>
+        <button data-v="smart">Smart</button>
+        <button data-v="local">Local only</button>
+        <button data-v="intl">With +code</button>
+      </div>
+      <p class="hint" id="phoneHint"></p>
+    </section>
+
+    <footer class="foot">
+      <span>Right-click → <b>FormGhost</b> for a form or field</span>
+      <span class="foot-acts"><button class="link" id="turnOff" hidden>Turn off here</button><button class="link" id="refreshGeo" title="Re-check IP location">Re-detect</button></span>
+    </footer>
+  </div>
+
+  <!-- Settings sheet -->
+  <section class="sheet" id="setSheet" role="dialog" aria-modal="true" aria-labelledby="setTitle" hidden>
+    <header class="sheet-head">
+      <button class="icon-btn" data-close title="Back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg></button>
+      <h2 id="setTitle">Settings</h2>
+    </header>
+    <div class="sheet-body">
+      <h3 class="sec">Filling</h3>
+      <div class="group">
+        <label class="toggle" title="Refill even if a field already has a value"><span>Overwrite filled fields</span><input type="checkbox" id="overwrite" /><span class="sw"></span></label>
+        <label class="toggle" title="Leaves optional fields empty; terms / consent boxes still get ticked"><span>Required fields only</span><input type="checkbox" id="requiredOnly" /><span class="sw"></span></label>
+        <label class="toggle" title="Ticks checkboxes and radios; always accepts terms / consent boxes"><span>Auto-tick checkboxes</span><input type="checkbox" id="checkboxes" /><span class="sw"></span></label>
+        <label class="toggle" title="Briefly outline every field it fills"><span>Highlight filled fields</span><input type="checkbox" id="highlight" /><span class="sw"></span></label>
+      </div>
+
+      <h3 class="sec">Safe test data</h3>
+      <div class="group">
+        <div class="field">
+          <label for="emailDomain">Email domain</label>
+          <input class="input" id="emailDomain" type="text" placeholder="example.com" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="emailDomainMsg" />
+          <p class="f-msg" id="emailDomainMsg"></p>
+        </div>
+        <div class="field">
+          <label for="emailInbox">Send to my inbox</label>
+          <input class="input" id="emailInbox" type="text" inputmode="email" placeholder="you@gmail.com" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="emailInboxMsg" />
+          <p class="f-msg" id="emailInboxMsg"></p>
+        </div>
+        <div class="field">
+          <label class="toggle bare"><span>Test phone numbers</span><input type="checkbox" id="testPhones" aria-describedby="testPhonesMsg" /><span class="sw"></span></label>
+          <p class="f-msg" id="testPhonesMsg">Fictional numbers reserved for testing in the US, CA, UK and AU. Other countries keep real-looking numbers.</p>
+        </div>
+        <div class="pv" id="preview">
+          <span class="pv-k">This identity now</span>
+          <span class="pv-v" id="pvEmail"></span>
+          <span class="pv-v" id="pvPhone"></span>
+        </div>
+      </div>
+
+      <h3 class="sec" id="secTesting">Testing <span class="sec-note">For forms you are building</span></h3>
+      <div class="group">
+        <div class="field">
+          <label class="toggle bare"><span>Edge-case mode</span><input type="checkbox" id="edgeMode" aria-describedby="edgeModeMsg" /><span class="sw"></span></label>
+          <p class="f-msg caution" id="edgeModeMsg">Breaks validation on purpose; not for real signups</p>
+        </div>
+        <div class="field">
+          <label class="toggle bare"><span>Sample files for uploads</span><input type="checkbox" id="sampleFiles" aria-describedby="sampleFilesMsg" /><span class="sw"></span></label>
+          <p class="f-msg caution" id="sampleFilesMsg">Attaches a tiny PNG or PDF; it uploads if you submit</p>
+        </div>
+        <div class="field">
+          <label class="toggle bare"><span>Test card numbers</span><input type="checkbox" id="testCards" aria-describedby="testCardsMsg" /><span class="sw"></span></label>
+          <p class="f-msg caution" id="testCardsMsg">Stripe test numbers; real checkouts decline them</p>
+        </div>
+      </div>
+
+      <h3 class="sec" id="secRules">Rules <span class="sec-note" id="rulesNote">A fixed value for matching fields</span></h3>
+      <div class="group">
+        <ul class="r-list" id="rList"></ul>
+        <form class="r-form" id="rForm" novalidate hidden>
+          <div class="r-grid">
+            <label for="rSite">Site</label>
+            <input class="input" id="rSite" type="text" placeholder="Every site" spellcheck="false" autocomplete="off" autocapitalize="off" />
+            <label for="rMatch">Field</label>
+            <input class="input mono" id="rMatch" type="text" placeholder="#email · name=phone · /coupon/i" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="rMatchHelp" />
+            <label for="rValue">Value</label>
+            <input class="input mono" id="rValue" type="text" placeholder="{{email}} or any text" spellcheck="false" autocomplete="off" autocapitalize="off" maxlength="2000" />
+          </div>
+          <p class="f-msg" id="rMatchHelp">Selector, /regex/ on the label, name=, id= or label=</p>
+          <p class="f-msg" id="rMsg" role="alert"></p>
+          <details class="tokens">
+            <summary>Tokens</summary>
+            <div class="tok-list" id="tokList"></div>
+          </details>
+          <div class="r-acts">
+            <button class="link" type="button" id="rCancel">Cancel</button>
+            <button class="btn-sm primary" type="submit" id="rSave">Add rule</button>
+          </div>
+        </form>
+        <button class="row-btn" id="rNew" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>Add rule</button>
+      </div>
+
+      <h3 class="sec">Remembered fields <span class="sec-note">Right-click → Fill field as</span></h3>
+      <div class="group" id="ovList"></div>
+
+      <h3 class="sec">Blocked sites <span class="sec-note">No shortcut or right-click fill</span></h3>
+      <div class="group">
+        <ul class="b-list" id="bList"></ul>
+        <form class="b-add" id="bAdd" novalidate>
+          <input class="input" id="bInput" type="text" placeholder="host, *.host, host:port, host/path" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Block a site" aria-describedby="bMsg" />
+          <button class="btn-sm" type="submit">Add</button>
+        </form>
+        <p class="f-msg b-msg" id="bMsg">*.host also covers every subdomain</p>
+      </div>
+
+      <h3 class="sec">Shortcuts</h3>
+      <div class="group" id="scList"></div>
+
+      <h3 class="sec">Backup <span class="sec-note">Settings, rules and remembered fields</span></h3>
+      <div class="group">
+        <label class="toggle"><span>Include recent identities</span><input type="checkbox" id="bkHistory" /><span class="sw"></span></label>
+        <div class="bk-row">
+          <button class="btn-sm" type="button" id="bkExport"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14" /></svg>Export</button>
+          <button class="btn-sm" type="button" id="bkImport"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 19h14" /></svg>Import…</button>
+          <input type="file" id="bkFile" accept=".json,application/json" hidden />
+        </div>
+        <div class="bk-pv" id="bkPreview" hidden>
+          <p class="bk-file" id="bkName"></p>
+          <p class="bk-counts" id="bkCounts"></p>
+          <div class="r-acts">
+            <button class="link" type="button" id="bkCancel">Cancel</button>
+            <button class="btn-sm" type="button" id="bkReplace" title="Your current settings, rules and remembered fields are replaced">Replace</button>
+            <button class="btn-sm primary" type="button" id="bkMerge" title="Adds to what you have; the file wins where both set a value">Merge</button>
+          </div>
+        </div>
+        <p class="f-msg grp-msg" id="bkMsg" role="status"></p>
+      </div>
+
+      <h3 class="sec">Bulk export <span class="sec-note">Raw identities to seed test data</span></h3>
+      <div class="group">
+        <form class="bulk" id="bulk" novalidate>
+          <div class="bulk-row">
+            <input class="input num" id="bulkCount" type="number" min="1" max="500" step="1" value="50" aria-label="How many identities" />
+            <span class="bulk-of">from</span>
+            <select class="input sel" id="bulkCountry" aria-label="Region"></select>
+          </div>
+          <div class="bulk-row">
+            <div class="seg two" id="bulkFmt" role="radiogroup" aria-label="Format">
+              <span class="seg-ind"></span>
+              <button type="button" role="radio" data-v="csv">CSV</button>
+              <button type="button" role="radio" data-v="json">JSON</button>
+            </div>
+            <button class="btn-sm primary" type="submit" id="bulkGo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14" /></svg>Download</button>
+          </div>
+        </form>
+        <p class="f-msg grp-msg" id="bulkMsg" role="status">Up to 500 · safe test data settings applied</p>
+      </div>
+
+      <h3 class="sec" id="secAbout">About</h3>
+      <div class="group about">
+        <div class="ab-id">
+          <p class="ab-name">FormGhost <span id="abVer"></span></p>
+          <p class="ab-by">Made by Aman Mahto (@mahtoaman)</p>
+        </div>
+        <a class="row-link" href="https://github.com/mahtoaman/formghost" data-ext aria-label="Source code: mahtoaman/formghost on GitHub">Source code<span class="rl-v">mahtoaman/formghost</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></a>
+        <a class="row-link" href="https://github.com/mahtoaman/formghost/issues/new/choose" data-ext aria-label="Report a bug on GitHub">Report a bug<span class="rl-v">GitHub issues</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></a>
+        <a class="row-link" href="https://github.com/mahtoaman/formghost/blob/main/LICENSE" data-ext aria-label="License: Apache-2.0">License<span class="rl-v">Apache-2.0</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details sheet -->
+  <section class="sheet" id="detSheet" role="dialog" aria-modal="true" aria-labelledby="detTitle" hidden>
+    <header class="sheet-head">
+      <button class="icon-btn" data-close title="Back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg></button>
+      <h2 id="detTitle">Details</h2>
+      <span class="sheet-sub" id="detSub"></span>
+    </header>
+    <div class="sheet-body" id="detBody"></div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="t-icon" id="tIcon"></span><span class="t-text" id="tText"></span><span class="t-acts" id="tActs"></span>
+    <div class="t-menu" id="tMenu" role="menu" aria-label="Copy the fill as" hidden>
+      <button role="menuitem" data-fmt="json">JSON</button>
+      <button role="menuitem" data-fmt="playwright">Playwright</button>
+      <button role="menuitem" data-fmt="cypress">Cypress</button>
+    </div>
+  </div>
+
+  <script src="../lib/rules.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
